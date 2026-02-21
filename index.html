@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>example4.ai — Real code examples for AI agents</title>
+<meta name="description" content="Stop burning tokens on documentation. Plug your AI into buildable, testable code examples via MCP.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example4.ai">
+<meta property="og:title" content="example4.ai — Real code examples for AI agents">
+<meta property="og:description" content="Stop burning tokens on documentation. Plug your AI into buildable, testable code examples via MCP.">
+<meta property="og:image" content="https://example4.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="example4.ai — Real code examples for AI agents">
+<meta name="twitter:description" content="Stop burning tokens on documentation. Plug your AI into buildable, testable code examples via MCP.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--bg-alt:#111;--bg-card:#161616;--bg-card-hover:#1a1a1a;--text:#e5e5e5;--text-dim:#888;--text-dimmer:#555;--accent:#f59e0b;--accent-dim:#b45309;--accent-glow:rgba(245,158,11,.15);--green:#22c55e;--red:#ef4444;--mono:'SF Mono','Fira Code','Cascadia Code','JetBrains Mono',Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;--max-w:1100px;--radius:8px}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:opacity .2s}
+a:hover{opacity:.8}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:40px 24px}
+.hero-inner{max-width:800px}
+.hero-logo{font-family:var(--mono);font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:700;color:var(--accent);letter-spacing:-.02em;margin-bottom:32px;display:inline-block}
+.hero-headline{font-size:clamp(3rem,8vw,5.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:24px;min-height:1.1em}
+.hero-headline .cursor{display:inline-block;width:3px;height:.85em;background:var(--accent);margin-left:4px;animation:blink 1s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{50%{opacity:0}}
+.hero-sub{font-size:clamp(1.05rem,2.5vw,1.3rem);color:var(--text-dim);max-width:600px;margin:0 auto 40px;line-height:1.5}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:var(--radius);font-size:1rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:#fbbf24;color:#000;opacity:1}
+.btn-secondary{background:transparent;color:var(--text-dim);border:1px solid #333}
+.btn-secondary:hover{border-color:#555;color:var(--text);opacity:1}
+.hero-note{font-size:.85rem;color:var(--text-dimmer);letter-spacing:.02em}
+.hero-note span{color:var(--accent)}
+
+/* ===== PROBLEM ===== */
+.section-label{font-family:var(--mono);font-size:.8rem;color:var(--accent);text-transform:uppercase;letter-spacing:.15em;margin-bottom:12px}
+.section-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:48px;line-height:1.1}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
+.card{background:var(--bg-card);border:1px solid #222;border-radius:var(--radius);padding:32px 24px;transition:border-color .3s,background .3s}
+.card:hover{border-color:#333;background:var(--bg-card-hover)}
+.card-icon{font-size:2rem;margin-bottom:16px}
+.card-title{font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.card-text{color:var(--text-dim);font-size:.92rem;line-height:1.5}
+.section-cta{font-size:1.2rem;color:var(--text);font-weight:600;font-style:italic}
+
+/* ===== CODE BLOCKS ===== */
+.code-block{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:var(--radius);padding:24px;font-family:var(--mono);font-size:clamp(.78rem,1.5vw,.88rem);line-height:1.7;overflow-x:auto;text-align:left;position:relative}
+.code-block .ln{color:#333;user-select:none;display:inline-block;width:2.2em;text-align:right;margin-right:1.2em}
+.ck{color:#f59e0b}.cs{color:#22c55e}.cn{color:#60a5fa}.cv{color:#e5e5e5}.cc{color:#555}.cp{color:#c084fc}.ct{color:#f472b6}
+
+/* ===== SOLUTION ===== */
+.solution-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.solution-text .section-title{margin-bottom:20px}
+.solution-desc{color:var(--text-dim);font-size:1.05rem;line-height:1.6;margin-bottom:24px}
+.solution-tagline{font-family:var(--mono);font-size:.95rem;color:var(--accent);border-left:3px solid var(--accent);padding-left:16px}
+
+/* ===== STEPS ===== */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.step{position:relative}
+.step-num{font-family:var(--mono);font-size:3.5rem;font-weight:800;color:#1a1a1a;position:absolute;top:-10px;left:0}
+.step-content{padding-top:50px}
+.step-title{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.step-title span{color:var(--accent)}
+.step-desc{color:var(--text-dim);font-size:.92rem;margin-bottom:16px;line-height:1.5}
+.step .code-block{font-size:.8rem}
+
+/* ===== COMPARISON TABLE ===== */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:14px 18px;text-align:left;border-bottom:1px solid #1a1a1a}
+th{color:var(--text-dimmer);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+th:first-child,td:first-child{color:var(--text-dim);font-weight:600}
+td:last-child{color:var(--accent)}
+thead th{background:var(--bg-card)}
+tbody tr:hover{background:var(--bg-card)}
+
+/* ===== STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
+.stat-num{font-family:var(--mono);font-size:clamp(2.5rem,6vw,4rem);font-weight:800;color:var(--accent);line-height:1;margin-bottom:8px}
+.stat-label{color:var(--text-dim);font-size:.95rem}
+
+/* ===== LANGUAGES ===== */
+.lang-section{text-align:center}
+.lang-badges{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:20px}
+.lang-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid #222;border-radius:999px;padding:10px 22px;font-family:var(--mono);font-size:.88rem;font-weight:600;transition:border-color .3s}
+.lang-badge:hover{border-color:var(--accent)}
+.lang-sub{color:var(--text-dimmer);font-size:.9rem}
+
+/* ===== COMMUNITY ===== */
+.community-desc{color:var(--text-dim);font-size:1.08rem;max-width:700px;margin-bottom:48px;line-height:1.6}
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mini-card{background:var(--bg-card);border:1px solid #222;border-radius:var(--radius);padding:24px;text-align:center;transition:border-color .3s}
+.mini-card:hover{border-color:var(--accent)}
+.mini-card-title{font-weight:700;margin-bottom:6px;font-size:1rem}
+.mini-card-text{color:var(--text-dim);font-size:.88rem}
+
+/* ===== POWERED BY ===== */
+.powered{text-align:center;padding:60px 0;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a}
+.powered-title{font-family:var(--mono);font-size:1rem;color:var(--text-dimmer);margin-bottom:8px}
+.powered-title span{color:var(--accent)}
+.powered-desc{color:var(--text-dim);font-size:.95rem;max-width:500px;margin:0 auto 12px}
+
+/* ===== WAITLIST ===== */
+.waitlist{background:var(--bg-alt);border-radius:16px;padding:64px 48px;text-align:center;max-width:640px;margin:0 auto}
+.waitlist .section-title{margin-bottom:12px}
+.waitlist-sub{color:var(--text-dim);margin-bottom:32px;font-size:1rem}
+.waitlist-form{display:flex;flex-direction:column;gap:14px;max-width:420px;margin:0 auto}
+.waitlist-form input,.waitlist-form select{background:#0a0a0a;border:1px solid #333;border-radius:var(--radius);padding:14px 18px;color:var(--text);font-size:1rem;font-family:var(--sans);outline:none;transition:border-color .2s;width:100%}
+.waitlist-form input:focus,.waitlist-form select:focus{border-color:var(--accent)}
+.waitlist-form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+.waitlist-form select option{background:#111;color:var(--text)}
+.waitlist-form .btn-primary{width:100%;justify-content:center;font-size:1.05rem;padding:16px}
+.waitlist-note{color:var(--text-dimmer);font-size:.8rem;margin-top:12px}
+.waitlist-success{display:none;padding:24px;text-align:center}
+.waitlist-success h3{color:var(--accent);font-size:1.3rem;margin-bottom:8px}
+.waitlist-success p{color:var(--text-dim)}
+
+/* ===== FOOTER ===== */
+footer{padding:48px 24px;text-align:center;border-top:1px solid #1a1a1a;margin-top:100px}
+.footer-brand{color:var(--text-dimmer);font-size:.88rem;margin-bottom:12px}
+.footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;font-size:.88rem}
+.footer-links a{color:var(--text-dim)}
+.footer-copy{color:#333;font-size:.78rem}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  section{padding:64px 0}
+  .cards,.steps,.stats,.mini-cards{grid-template-columns:1fr}
+  .solution-grid{grid-template-columns:1fr;gap:32px}
+  .hero{min-height:90vh;padding:60px 24px}
+  .waitlist{padding:40px 24px;border-radius:12px;margin:0 8px}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .btn{width:100%;max-width:300px;justify-content:center}
+  table{font-size:.82rem}
+  th,td{padding:10px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-inner">
+  <div class="hero-logo">example4.ai</div>
+  <h1 class="hero-headline" id="typed-target"></h1>
+  <p class="hero-sub">Real, buildable code examples for AI agents.<br>Stop burning tokens on documentation.</p>
+  <div class="hero-ctas">
+    <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+    <a href="#problem" class="btn btn-secondary">See how it works ↓</a>
+  </div>
+  <p class="hero-note">Launching at <span>AI Week Italia</span> · May 2026</p>
+</div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+<div class="container">
+  <div class="fade-in">
+    <div class="section-label">The problem</div>
+    <h2 class="section-title">Documentation is a token tax.</h2>
+  </div>
+  <div class="cards">
+    <div class="card fade-in">
+      <div class="card-icon">🔥</div>
+      <div class="card-title">Tokens burned to generate it</div>
+      <div class="card-text">AI spends thousands of tokens synthesizing documentation that goes stale in weeks.</div>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon">🔥</div>
+      <div class="card-title">Tokens burned to read it</div>
+      <div class="card-text">Your AI agent parses pages of prose just to figure out how to call a method.</div>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon">❌</div>
+      <div class="card-title">Never verifiable</div>
+      <div class="card-text">No CI can tell you if documentation is still correct. Code can.</div>
+    </div>
+  </div>
+  <p class="section-cta fade-in">What if your AI could learn from real code instead?</p>
+</div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+<div class="container">
+  <div class="solution-grid">
+    <div class="solution-text fade-in">
+      <div class="section-label">The solution</div>
+      <h2 class="section-title">Code that documents itself.</h2>
+      <p class="solution-desc">example4.ai is an MCP server that gives your AI agent real, buildable, testable code examples for any library. No prose. No markdown. Just code that works.</p>
+      <div class="solution-tagline">If it builds, it's true. If tests pass, it's correct.</div>
+    </div>
+    <div class="fade-in">
+      <div class="code-block"><span class="ln">1</span>{<br><span class="ln">2</span>  <span class="ck">"library"</span>: <span class="cs">"Newtonsoft.Json"</span>,<br><span class="ln">3</span>  <span class="ck">"version"</span>: <span class="cs">"13.0.3"</span>,<br><span class="ln">4</span>  <span class="ck">"examples"</span>: [<br><span class="ln">5</span>    {<br><span class="ln">6</span>      <span class="ck">"name"</span>: <span class="cs">"basic-serialization"</span>,<br><span class="ln">7</span>      <span class="ck">"complexity"</span>: <span class="cs">"beginner"</span>,<br><span class="ln">8</span>      <span class="ck">"build"</span>: <span class="cs">"dotnet build"</span>,<br><span class="ln">9</span>      <span class="ck">"test"</span>: <span class="cs">"dotnet test"</span><br><span class="ln">10</span>    }<br><span class="ln">11</span>  ]<br><span class="ln">12</span>}</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+<div class="container">
+  <div class="fade-in">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Three steps. Zero docs.</h2>
+  </div>
+  <div class="steps">
+    <div class="step fade-in">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title"><span>Plug in.</span></div>
+        <div class="step-desc">Connect example4.ai as an MCP server to your AI agent.</div>
+        <div class="code-block"><span class="ln">1</span>{<br><span class="ln">2</span>  <span class="ck">"mcpServers"</span>: {<br><span class="ln">3</span>    <span class="ck">"example4"</span>: {<br><span class="ln">4</span>      <span class="ck">"url"</span>: <span class="cs">"https://example4.ai/mcp"</span><br><span class="ln">5</span>    }<br><span class="ln">6</span>  }<br><span class="ln">7</span>}</div>
+      </div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title"><span>Ask.</span></div>
+        <div class="step-desc">Your AI asks how to use a library.</div>
+        <div class="code-block"><span class="cc">// Your prompt:</span><br><br><span class="cv">"How do I use custom</span><br><span class="cv"> JsonConverters in</span><br><span class="cv"> Newtonsoft.Json?"</span></div>
+      </div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title"><span>Get real code.</span></div>
+        <div class="step-desc">Receives working code from a project that builds and passes tests.</div>
+        <div class="code-block"><span class="cp">public class</span> <span class="cn">DateConverter</span><br>  : <span class="cn">JsonConverter</span><<span class="cn">DateTime</span>><br>{<br>  <span class="cp">public override</span> <span class="cn">DateTime</span><br>    <span class="ct">ReadJson</span>(<span class="cn">JsonReader</span> <span class="cv">r</span>, ...)<br>  {<br>    <span class="cp">var</span> <span class="cv">s</span> = (<span class="cn">string</span>)<span class="cv">r</span>.Value;<br>    <span class="cp">return</span> <span class="cn">DateTime</span>.Parse(<span class="cv">s</span>);<br>  }<br>}</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- COMPARISON -->
+<section id="compare">
+<div class="container">
+  <div class="fade-in">
+    <div class="section-label">Comparison</div>
+    <h2 class="section-title">example4.ai vs the old way.</h2>
+  </div>
+  <div class="table-wrap fade-in">
+    <table>
+      <thead>
+        <tr><th></th><th>Traditional Docs</th><th>DeepWiki</th><th>example4.ai</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Format</td><td>Prose / Markdown</td><td>Generated wiki</td><td>Buildable code</td></tr>
+        <tr><td>Verifiable</td><td>❌</td><td>❌</td><td>✅ CI/CD</td></tr>
+        <tr><td>Freshness</td><td>❌ Stale</td><td>❌ Snapshot</td><td>✅ Push-triggered</td></tr>
+        <tr><td>Token cost</td><td>🔥🔥🔥</td><td>🔥🔥</td><td>🟢 Minimal</td></tr>
+        <tr><td>AI-native</td><td>❌</td><td>❌</td><td>✅ MCP + LSAI</td></tr>
+        <tr><td>Executable</td><td>❌</td><td>❌</td><td>✅ dotnet test</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+<div class="container">
+  <div class="stats">
+    <div class="fade-in">
+      <div class="stat-num" data-target="41" data-suffix="-86%">0%</div>
+      <div class="stat-label">Token savings vs traditional docs</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num" data-target="50" data-suffix="+">0</div>
+      <div class="stat-label">Libraries at launch</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num" data-target="6" data-suffix="">0</div>
+      <div class="stat-label">Languages supported</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+<div class="container lang-section">
+  <div class="fade-in">
+    <div class="section-label">Ecosystem</div>
+    <h2 class="section-title">Multi-language from day one.</h2>
+  </div>
+  <div class="lang-badges fade-in">
+    <span class="lang-badge">C#</span>
+    <span class="lang-badge">TypeScript</span>
+    <span class="lang-badge">Python</span>
+    <span class="lang-badge">Java</span>
+    <span class="lang-badge">Go</span>
+    <span class="lang-badge">Rust</span>
+  </div>
+  <p class="lang-sub fade-in">And growing with the community.</p>
+</div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+<div class="container">
+  <div class="fade-in">
+    <div class="section-label">Community</div>
+    <h2 class="section-title">Publish your examples.<br>Grow the ecosystem.</h2>
+  </div>
+  <p class="community-desc fade-in">example4.ai is like npm for code examples. Publish example repos for your library, automatically verified by CI, and make them available to every AI agent on the planet.</p>
+  <div class="mini-cards">
+    <div class="mini-card fade-in">
+      <div class="mini-card-title">Library maintainers</div>
+      <div class="mini-card-text">Increase adoption of your library.</div>
+    </div>
+    <div class="mini-card fade-in">
+      <div class="mini-card-title">Developers</div>
+      <div class="mini-card-text">Contribute examples, build reputation.</div>
+    </div>
+    <div class="mini-card fade-in">
+      <div class="mini-card-title">AI Agents</div>
+      <div class="mini-card-text">Access verified code via MCP.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- POWERED BY -->
+<div class="powered">
+<div class="container">
+  <div class="fade-in">
+    <div class="powered-title">Powered by <span>LSAI</span></div>
+    <p class="powered-desc">Semantic code navigation that understands types, relationships, and call graphs. Not just grep.</p>
+    <a href="https://github.com/LadislavSopko/lsai-protocol">Learn more about LSAI →</a>
+  </div>
+</div>
+</div>
+
+<!-- WAITLIST -->
+<section id="waitlist">
+<div class="container">
+  <div class="waitlist fade-in">
+    <h2 class="section-title">Be the first to kill your docs.</h2>
+    <p class="waitlist-sub">Join the waitlist for early access. Launching May 2026.</p>
+    <form class="waitlist-form" id="waitlist-form">
+      <input type="email" name="email" placeholder="you@company.com" required>
+      <select name="role" required>
+        <option value="" disabled selected>I am a...</option>
+        <option value="developer">Developer</option>
+        <option value="maintainer">Library Maintainer</option>
+        <option value="lead">Team Lead</option>
+        <option value="enthusiast">AI Enthusiast</option>
+        <option value="other">Other</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Join waitlist →</button>
+      <p class="waitlist-note">No spam. Just launch updates.</p>
+    </form>
+    <div class="waitlist-success" id="waitlist-success">
+      <h3>You're in.</h3>
+      <p>We'll notify you when example4.ai goes live.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-brand">example4.ai · A product by 0ics srl · Bologna, Italy</div>
+<div class="footer-links">
+  <a href="https://github.com/LadislavSopko/example4-ai">GitHub</a>
+  <a href="https://github.com/LadislavSopko/lsai-protocol">LSAI</a>
+  <a href="#">AI Week 2026</a>
+</div>
+<div class="footer-copy">© 2026 0ics srl. All rights reserved.</div>
+</footer>
+
+<script>
+// Typing effect
+(function(){
+  var text = "Docs are dead.";
+  var target = document.getElementById("typed-target");
+  var i = 0;
+  target.innerHTML = '<span class="cursor"></span>';
+  function type(){
+    if(i < text.length){
+      target.innerHTML = text.slice(0, i + 1) + '<span class="cursor"></span>';
+      i++;
+      setTimeout(type, i === 1 ? 400 : 70 + Math.random() * 50);
+    }
+  }
+  setTimeout(type, 600);
+})();
+
+// Fade-in on scroll
+(function(){
+  var els = document.querySelectorAll(".fade-in");
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add("visible");
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.15});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+
+// Animated counters
+(function(){
+  var nums = document.querySelectorAll("[data-target]");
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      obs.unobserve(el);
+      var target = parseInt(el.dataset.target);
+      var suffix = el.dataset.suffix || "";
+      var start = 0;
+      var duration = 1200;
+      var startTime = null;
+      function step(ts){
+        if(!startTime) startTime = ts;
+        var p = Math.min((ts - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - p, 3);
+        var val = Math.round(start + (target - start) * ease);
+        el.textContent = val + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, {threshold: 0.5});
+  nums.forEach(function(n){ obs.observe(n); });
+})();
+
+// Waitlist form
+(function(){
+  var form = document.getElementById("waitlist-form");
+  var success = document.getElementById("waitlist-success");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var data = {
+      email: form.email.value,
+      role: form.role.value,
+      timestamp: new Date().toISOString()
+    };
+    var list = JSON.parse(localStorage.getItem("example4_waitlist") || "[]");
+    list.push(data);
+    localStorage.setItem("example4_waitlist", JSON.stringify(list));
+    form.style.display = "none";
+    success.style.display = "block";
+  });
+})();
+</script>
+</body>
+</html>
