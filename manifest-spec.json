@@ -1,0 +1,30 @@
+{
+  "$schema": "https://example4.ai/schema/manifest/v1",
+  "library": "Newtonsoft.Json",
+  "version": "13.0.3",
+  "language": "csharp",
+  "repository": "https://github.com/example4-ai/newtonsoft-json-examples",
+  "examples": [
+    {
+      "name": "basic-serialization",
+      "description": "Serialize and deserialize POCO objects",
+      "path": "./examples/basic-serialization",
+      "tags": ["serialization", "deserialization", "poco"],
+      "complexity": "beginner",
+      "build": "dotnet build",
+      "test": "dotnet test"
+    },
+    {
+      "name": "custom-converters",
+      "description": "Custom JsonConverter implementations",
+      "path": "./examples/custom-converters",
+      "tags": ["converter", "custom", "advanced"],
+      "complexity": "advanced",
+      "build": "dotnet build",
+      "test": "dotnet test"
+    }
+  ],
+  "build": "dotnet build",
+  "test": "dotnet test",
+  "ci": "github-actions"
+}
