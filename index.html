@@ -451,7 +451,7 @@ footer{padding:48px 24px;text-align:center;border-top:1px solid #1a1a1a;margin-t
     e.preventDefault();
     btn.disabled = true;
     btn.textContent = "Sending...";
-    fetch("https://formspree.io/f/xpwrzgvq", {
+    fetch("https://formspree.io/f/xeelrqgy", {
       method: "POST",
       headers: {"Content-Type": "application/json", "Accept": "application/json"},
       body: JSON.stringify({email: form.email.value, role: form.role.value})
