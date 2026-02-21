@@ -442,22 +442,33 @@ footer{padding:48px 24px;text-align:center;border-top:1px solid #1a1a1a;margin-t
   nums.forEach(function(n){ obs.observe(n); });
 })();
 
-// Waitlist form
+// Waitlist form — Formspree
 (function(){
   var form = document.getElementById("waitlist-form");
   var success = document.getElementById("waitlist-success");
+  var btn = form.querySelector("button");
   form.addEventListener("submit", function(e){
     e.preventDefault();
-    var data = {
-      email: form.email.value,
-      role: form.role.value,
-      timestamp: new Date().toISOString()
-    };
-    var list = JSON.parse(localStorage.getItem("example4_waitlist") || "[]");
-    list.push(data);
-    localStorage.setItem("example4_waitlist", JSON.stringify(list));
-    form.style.display = "none";
-    success.style.display = "block";
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+    fetch("https://formspree.io/f/xpwrzgvq", {
+      method: "POST",
+      headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      body: JSON.stringify({email: form.email.value, role: form.role.value})
+    }).then(function(r){
+      if(r.ok){
+        form.style.display = "none";
+        success.style.display = "block";
+      } else {
+        btn.disabled = false;
+        btn.textContent = "Join waitlist →";
+        alert("Something went wrong. Please try again.");
+      }
+    }).catch(function(){
+      btn.disabled = false;
+      btn.textContent = "Join waitlist →";
+      alert("Network error. Please try again.");
+    });
   });
 })();
 </script>
